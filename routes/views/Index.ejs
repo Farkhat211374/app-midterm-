@@ -440,6 +440,20 @@
             font-size: 0.8rem;
             font-weight: bold;
         }
+        .brand span{
+            color: #2c2c2c;
+            font-size: 15px;
+            margin-left: 20px;
+            display: inline-block;
+            display: flex;
+        }
+        .rect{
+            width: 15px;
+            height: 15px;
+            background-color: #00a082;
+            border-radius: 50px;
+            margin-left: 5px;
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
@@ -455,7 +469,7 @@
         <div class="nav">
 
             <div class="Log">
-                <span class="brand">Otrick Pizza</span>
+                <span class="brand">Otrick Pizza <span><%=city%><div class="rect"></div></span></span>
             </div>
 
             <ul class="menu">
@@ -463,7 +477,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/tours" target="_blank">Tours</a>
+                    <a href="/tours" target="_blank">Near</a>
                 </li>
                 <li>
                     <a href="/service">Service</a>
@@ -480,7 +494,7 @@
                 </a>
             </ul>
         </div>
-
+    </div>
 </header>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <div class="cart">
@@ -501,7 +515,7 @@
 </div>
 <header class="header1" style="background-color:#ffc244">
     <div class="offer" id="offer">
-        <h1 class="h1">Delivery in the city of <span>Nur-Sultan</span></h1>
+        <h1 class="h1">Delivery in the city of <span><%=city%></span></h1>
     </div>
     <div class="list">
         <a href="/first_pizza"><img src="https://lifeinua.com/photos/board/2017/11/86461073.jpg" alt="first pizza" width="200" height="150" position="absolute"></a>
@@ -851,6 +865,7 @@
                             <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Terms & Conditions</a></li>
                             <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>About menu</a></li>
                             <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Help & Support</a></li>
+                            <img src="https://static-maps.yandex.ru/1.x/?lang=en_US&ll=51.128207, 71.430420&size=450,450&z=10&l=map&pt=51.128207, 71.430420,pm2rdl1~51.128207, 71.430420,pm2rdl99" alt="" style="border: 0;margin-left:550px" />
                         </ul>
                     </div>
                 </div>
