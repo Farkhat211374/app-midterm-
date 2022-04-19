@@ -2,6 +2,9 @@ const  express = require('express')
 const app = express()
 const port = 7777
 app.set('view engine','ejs')
+app.use(express.static("public"))
+app.use(express.json())
+
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
 app.use("/tours", require("./routes/tours"));
@@ -16,6 +19,7 @@ app.use("/fifth_pizza",require("./routes/fifth_pizza"));
 app.use("/sixth_pizza",require("./routes/sixth_pizza"));
 app.use("/sale",require("./routes/sale"));
 app.use("/reg",require("./routes/reg"));
+app.use("/find",require("./routes/find"));
 
 
 app.listen(port, () =>
