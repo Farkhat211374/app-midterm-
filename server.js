@@ -1,6 +1,12 @@
 const  express = require('express')
 const app = express()
-const port = 7777
+//const port = 7777
+
+let port  = process.env.PORT;
+if(port == null || port == ""){
+    port= 3000;
+}
+
 app.set('view engine','ejs');
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
