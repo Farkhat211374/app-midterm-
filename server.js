@@ -56,16 +56,8 @@ app.post('/sign_up', function(req,res) {
     });
     console.log("server listening at port 7777");
 })
-app.post('/updates', function(req,res) {
-    email2=req.body.email1;
-    newemail=req.body.emailnew;
-            db.collection('Harm').findOneAndUpdate(
-                { email : email2 },
-                { $set:newemail},
-                function (err, collection) {
-                    res.send({ error: err, affected:collection });
-                }
-            );
-    console.log("Updated");
-})
+app.post('/update', (req, res) => {
+    res.send('update');
+});
+
 
