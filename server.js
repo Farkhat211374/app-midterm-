@@ -51,7 +51,7 @@ app.post('/sign_up', function(req,res) {
     }
     db.collection('Harm').insertOne(data, function (err, collection) {
         if (err) throw err;
-        console.log("Record inserted Successfully");
+        res.send({ message:"Record inserted Successfully"});
 
     });
     console.log("server listening at port 7777");
