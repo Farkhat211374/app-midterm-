@@ -3,7 +3,7 @@ let db = mongoose.connection;
 module.exports = async function getUsers(req, res){
     await db.collection('Harm').findOne({}, function (err, result) {
             if (err) throw err;
-            console.log(result);
+           res.send( {message:result});
             db.close();
         });
 }

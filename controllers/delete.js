@@ -8,7 +8,7 @@ module.exports = async function deleteUser(req, res){
     }
     await db.collection('Harm').deleteOne(data, function (err, collection) {
         if (err) throw err;
-        console.log("Record deleted Successfully");
+        res.send({message:"Record deleted Successfully"});
 
     });
     console.log("server listening at port 7777");
