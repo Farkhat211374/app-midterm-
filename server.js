@@ -1,6 +1,7 @@
 const  express = require('express')
 const app = express()
 const port = 7777
+const swagerUI=require('swagger-ui-express')
 app.set('view engine','ejs')
 app.use("/", require("./root"));
 app.use("/register", require("./register"));
@@ -19,13 +20,11 @@ app.use("/reg",require("./reg"));
 app.listen(port, () =>
     console.log(`App listening at http://localhost:${port}`)
 );
-
 const bodyParser = require("body-parser");
-
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://1Harm:EsOd9029@cluster0.7hrdf.mongodb.net/Signin');
 let db = mongoose.connection;
-
+var methodOverride=require('method-override')
 db.on('error', console.log.bind(console, "connection error"));
 db.once('open', function(callback){
     console.log("connection succeeded");
@@ -57,7 +56,16 @@ app.post('/sign_up', function(req,res) {
     });
     console.log("server listening at port 7777");
 })
-app.get('/getUsers', function(req,res) {
-        const users = db.collection('Harm').find()
-        console.log(res.send(users))
+app.post('/updates', function(req,res) {
+    email2=req.body.email1;
+    newemail=req.body.emailnew;
+            db.collection('Harm').findOneAndUpdate(
+                { email : email2 },
+                { $set:newemail},
+                function (err, collection) {
+                    res.send({ error: err, affected:collection });
+                }
+            );
+    console.log("Updated");
 })
+
