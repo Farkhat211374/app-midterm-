@@ -5,7 +5,7 @@
     "title": "My User Project CRUD",
     "description": "My User Project Application API",
     "license": {
-      "name": "MIT",
+      "name": "AITU",
       "url": "https://opensource.org/licenses/MIT"
     }
   },
@@ -17,17 +17,11 @@
       "description": "API for users in the system"
     }
   ],
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
-    "/user": {
+    "/getUsers": {
       "get": {
         "tags": ["User"],
         "summary": "Get all users in system",
@@ -41,7 +35,61 @@
         }
       }
     },
-    "/user": {
+    "/delete": {
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to delete",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+
+    },
+    "/update": {
+      "put": {
+        "summary": "Update user with given ID",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to update",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+
+    },
+    "/sign_up": {
       "post": {
         "tags": [
           "User"
@@ -74,6 +122,7 @@
       }
     }
   },
+
   "definitions": {
     "User": {
       "required": ["email"],
@@ -97,18 +146,6 @@
     "Users": {
       "type": "array",
       "$ref": "#/definitions/User"
-    }
-  },
-  "delete": {
-    "summary": "Delete user with given ID",
-    "tags": ["Users"],
-    "responses": {
-      "200": {
-        "description": "User is deleted",
-        "schema": {
-          "$ref": "#/definitions/User"
-        }
-      }
     }
   }
 }
