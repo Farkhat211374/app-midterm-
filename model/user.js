@@ -1,21 +1,49 @@
-var mongoose = require('mongoose');
-var User = new mongoose.Schema({
+const mongoose = require("mongoose");
+const passportLocalMongoose=require('passport-local-mongoose')
+const passport=require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const findOrCreate = require('mongoose-findorcreate')
+
+
+let userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
         unique: true
     },
-    name: {
-        type: String,
-        unique: true,
-        required: true
-    },
     password: {
         type: String,
-        unique: true,
-        required: true
+        required: true,
+        default: '12345'
     },
-    phone: String,
+    googleId: String
 });
-var user = new mongoose.model('Harm', User);
-module.exports = user;
+
+userSchema.plugin(passportLocalMongoose)
+userSchema.plugin(findOrCreate)
+
+let userModel = new mongoose.model("User", userSchema);
+
+passport.use(userModel.createStrategy())
+passport.serializeUser(function (user, done) {
+    done(null, user.id)
+})
+passport.deserializeUser(function (id, done) {
+    userModel.findById(id, function (err, user) {
+        done(err,user)
+    })
+})
+
+passport.use(new GoogleStrategy({
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        callbackURL: "http://localhost:7777/auth/google/pizza"
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        userModel.findOrCreate({ googleId: profile.id }, function (err, user) {
+            return cb(err, user);
+        });
+    }
+));
+
+module.exports = userModel;
